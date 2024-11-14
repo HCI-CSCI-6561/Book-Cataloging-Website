@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+.light_brown {
+    background-color: #cca07c;
+}
+
 .home_nav_bar nav {
     @apply 
     bg-amber-900
     flex
-    py-6 px-10
+    py-4 px-10
     w-full
     items-center
     justify-between
@@ -20,7 +24,15 @@
     flex
     list-none
     items-center
-    divide-x
+    space-x-4;
+    color: #ece4e4;
+}
+
+.home_nav_bar li {
+    @apply 
+    flex
+    list-none
+    items-center
     space-x-4;
     color: #ece4e4;
 }
@@ -41,10 +53,33 @@
 }
 
 
-.profile_dropdown {
+.profile_button {
     @apply flex items-center ml-4;
     display: block;
 
+}
+
+.profile_dropdown {
+    position: relative;
+}
+
+.profile_dropdown_menu{
+    position: absolute;
+    right: 0px;
+    top: calc(100% + 0.25rem);
+    background-color: #eac2ab;
+    color: black;
+    padding: .75rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, .22);
+    opacity: 1;
+    transition: opacity 150ms ease-in-out;
+
+
+}
+
+.profile_dropdown > .profile_button:focus + .profile_dropdown_menu {
+    opacity: 5;
 }
 
 .login_form {
