@@ -11,7 +11,8 @@ export default function NavHeader() {
     "/homepage": "Home",
     "/booklisting": "Book Listing",
     "/bookdetails": "Book Details",
-    "/login": "Login"
+    "/login": "Login",
+    "/bookshelf": "Bookshelf"
   };
 
   // Generate breadcrumb trail

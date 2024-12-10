@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const reviewSchema = new Schema({
@@ -22,6 +22,9 @@ const reviewSchema = new Schema({
   },
 });
 
-export default mongoose.model('Reviews', reviewSchema);
+
+const Reviews = mongoose.model('Reviews', reviewSchema);
+
+module.exports = Reviews;
 
 

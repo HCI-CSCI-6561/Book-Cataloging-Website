@@ -57,37 +57,6 @@ button.google-btn svg {
 }
 
 
-/* .filter-section-subheading {
-    @apply 
-    text-sm
-    font-bold
-    mb-4;
-    color: rgb(40, 44, 63);
-}
-
-.filter-section-label {
-    @apply 
-    flex 
-    items-center 
-    text-sm;
-    color: #282c3f;
-    text-overflow: ellipsis;
-}
-
-.common-checkbox {
-
-    top: 0;
-    left: 0;
-    border: 1px solid #242424;
-    @apply
-    box-border
-    absolute
-    size-4
-    rounded-sm
-    bg-white
-} */
-
-
 .filter-section-subheading {
     @apply text-sm font-bold mb-4 text-gray-700 uppercase;
   }

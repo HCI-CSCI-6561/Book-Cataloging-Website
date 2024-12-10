@@ -40,28 +40,29 @@ function FilterSection({ onFilterChange }) {
         }
       };
 
-    const validateYear = (year, type) => {
-        if (!/^\d{4}$/.test(year)) {
-          setError("Please use the YYYY format, e.g., 2034.");
-          return false;
-        }
-        if (type === "to" && parseInt(year) > currentYear) {
-          setError(`"To" year cannot be greater than ${currentYear}.`);
-          return false;
+      const validateYear = (year, type) => {
+        if (year && (!/^[0-9]{4}$/.test(year) || (type === "to" && year > currentYear))) {
+            setError(`Invalid year: ${type === "to" ? 'To year cannot exceed ' + currentYear : 'Use YYYY format'}`);
+            return false;
         }
         setError("");
         return true;
-      };
+    };
     
+    // const handleYearChange = (type, value) => {
+    // if (validateYear(value, type)) {
+    //     const updatedPublishYear = { ...publishYear, [type]: value };
+    //     if (type === "to" && (!value || parseInt(value) > currentYear)) {
+    //     updatedPublishYear.to = currentYear.toString();
+    //     }
+    //     setPublishYear(updatedPublishYear);
+    //     applyFilters(selectedGenres, pages, searchQuery, updatedPublishYear, selectedRatings);
+    // }
+    // };
     const handleYearChange = (type, value) => {
-    if (validateYear(value, type)) {
-        const updatedPublishYear = { ...publishYear, [type]: value };
-        if (type === "to" && (!value || parseInt(value) > currentYear)) {
-        updatedPublishYear.to = currentYear.toString();
+        if (validateYear(value, type)) {
+            setPublishYear(prev => ({ ...prev, [type]: value }));
         }
-        setPublishYear(updatedPublishYear);
-        applyFilters(selectedGenres, pages, searchQuery, updatedPublishYear, selectedRatings);
-    }
     };
     
 
@@ -219,6 +220,13 @@ function FilterSection({ onFilterChange }) {
           ))}
         </div>
       </div>
+
+      <button
+        onClick={applyFilters}
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+      >
+        Apply
+      </button>
     </aside>
       
     </div>
