@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.login_page {
+    @apply
+    fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50
+}
+
+
+
+.login_form {
+    /* width: 100%;
+    max-width: 400px;
+    padding: 30px; */
+    border-radius: 10px;
+    /* backdrop-filter: blur(10px); */
+    background: rgb(210, 210, 210);
+    box-shadow: 0 4px 10px rgba(170, 72, 72, 0.3);
+    border: 1px solid rgba(221, 13, 13, 0.2);
+    @apply
+    p-6 rounded-lg shadow-lg w-full max-w-sm relative
+}
+
+button.google-btn {
+    @apply 
+    flex items-center justify-center w-full 
+    py-2 mt-4
+     bg-white text-gray-500 
+     rounded-md 
+     shadow-lg 
+     active:scale-95 
+     active:translate-y-1
+     hover:cursor-pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button.google-btn svg {
+    @apply mr-2 h-6 w-6;
+}
+
+
+
+.hover {
+    @apply 
+    transform 
+    transition 
+    duration-200 
+    hover:scale-110;
+}
+
+.active {
+    @apply
+    font-bold 
+    /* underline */
+    text-black;
+}
+
+
+/* .filter-section-subheading {
+    @apply 
+    text-sm
+    font-bold
+    mb-4;
+    color: rgb(40, 44, 63);
+}
+
+.filter-section-label {
+    @apply 
+    flex 
+    items-center 
+    text-sm;
+    color: #282c3f;
+    text-overflow: ellipsis;
+}
+
+.common-checkbox {
+
+    top: 0;
+    left: 0;
+    border: 1px solid #242424;
+    @apply
+    box-border
+    absolute
+    size-4
+    rounded-sm
+    bg-white
+} */
+
+
+.filter-section-subheading {
+    @apply text-sm font-bold mb-4 text-gray-700 uppercase;
+  }
+  
+.filter-section-label {
+    @apply flex items-center text-sm text-gray-800;
+  }
+  
+.common-checkbox {
+    @apply box-border w-4 h-4 rounded-sm border-gray-400 bg-white;
+  }
+  
+.filter-container {
+    @apply p-4 border border-gray-300 bg-white rounded-lg shadow-md;
+  }
+  
