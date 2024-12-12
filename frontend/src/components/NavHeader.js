@@ -8,7 +8,7 @@ export default function NavHeader() {
 
   // Define breadcrumb mapping
   const breadcrumbs = {
-    "/homepage": "Home",
+    "/home": "HomeBlock",
     "/booklisting": "Book Listing",
     "/bookdetails": "Book Details",
     "/login": "Login",
@@ -24,7 +24,7 @@ export default function NavHeader() {
         {/* Breadcrumbs */}
         <div className="text-sm flex items-center space-x-2">
           {/* Home Icon with Link */}
-          <Link to="/homepage" className="flex items-center space-x-1 hover">
+          <Link to="/home" className="flex items-center space-x-1 hover">
             <MdHome className="text-lg" />
             <span>Home</span>
           </Link>

@@ -16,9 +16,7 @@ const BookListing = () => {
   return (
     <div className="flex flex-col bg-gray-100 min-h-screen">
       {/* Header Section */}
-      <header>
         <NavBar />
-      </header>
 
       {/* Navigation Section */}
       <NavHeader />
@@ -33,8 +31,8 @@ const BookListing = () => {
         <main className="flex-1 p-6">
           {filteredBooks.length > 0 ? (
             <div className="grid grid-cols-3 gap-6">
-              {filteredBooks.map((book, index) => (
-                <BookCard key={index} {...book} /> // Render BookCard with book details
+            {filteredBooks.map((book) => (
+                <BookCard key={book.id} book={book} /> // Pass book data as a prop
               ))}
             </div>
           ) : (

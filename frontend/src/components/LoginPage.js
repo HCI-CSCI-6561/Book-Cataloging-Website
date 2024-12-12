@@ -2,9 +2,10 @@ import React from "react";
 import { FcGoogle } from "react-icons/fc";
 import { IoClose } from "react-icons/io5";
 
-export default function LoginPage({ closeModal }) {
+export default function LoginPage({ closeModal, onLogin }) {
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:4000/auth/google"; // Replace with your backend's base URL
+    // window.location.href = "http://localhost:4000/auth/google"; // Replace with your backend's base URL
+    onLogin();
   };
 
   return (

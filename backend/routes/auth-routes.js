@@ -4,7 +4,7 @@ const passport = require('passport');
 
 // auth login
 router.get('/login', (req, res) => {
-    // TODO
+    // TODO   //frontend main localhost /homepage
     res.render('login', { user: req.user });
     // res.json({ user: req.user });
 })
@@ -17,6 +17,8 @@ router.get('/logout', (req, res) => {
     //     res.send({ message: 'Logout successful' });
     // });
     req.logout();
+
+      //frontend main localhost /homepage
     res.redirect('/');
 });
 
