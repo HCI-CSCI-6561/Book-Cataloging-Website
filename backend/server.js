@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 });
 
 //set up engine
-app.set('view engine', 'ejs');
+// app.set('view engine', 'ejs');
 
 // Middleware
 app.use(express.json());
@@ -76,16 +76,13 @@ app.get('/', (req, res) => {
 });
 
 // Add routes for bookshelf and reviews
-
 const bookRoutes = require('./routes/book-routes');
 const reviewRoutes = require('./routes/review-routes');
 const ratingRoutes = require('./routes/rating-routes');
 
 // Use routes
-app.use('/books', bookRoutes);
-app.use('/reviews', reviewRoutes);
-
-
+// app.use('/books', bookRoutes);
+// app.use('/reviews', reviewRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/ratings', ratingRoutes);

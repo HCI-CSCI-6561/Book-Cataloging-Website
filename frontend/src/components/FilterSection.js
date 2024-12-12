@@ -15,20 +15,11 @@ function FilterSection({ onFilterChange }) {
     // Generate a list of years for the dropdown
     const years = Array.from({ length: currentYear - 1800 + 1 }, (_, i) => 1800 + i).reverse();
 
-        // Handle search input change
+    // Handle search input change
     const handleSearchChange = (e) => {
         const query = e.target.value.toLowerCase();
         setSearchQuery(query);
         applyFilters(selectedGenres, pages, query);
-    };
-
-    // Update genre selection
-    const toggleGenre = (genre) => {
-        const updatedGenres = selectedGenres.includes(genre)
-        ? selectedGenres.filter((g) => g !== genre)
-        : [...selectedGenres, genre];
-        setSelectedGenres(updatedGenres);
-        applyFilters(updatedGenres, pages);
     };
 
     // Update page range
@@ -36,10 +27,11 @@ function FilterSection({ onFilterChange }) {
         const selectedPages = parseInt(e.target.value, 10);
         if (!isNaN(selectedPages)) {
           setPages(selectedPages);
-          applyFilters(selectedPages);
+          applyFilters(selectedGenres, selectedPages, searchQuery, publishYear, selectedRatings);
         }
       };
 
+      // Publish year Validate
       const validateYear = (year, type) => {
         const yearInt = parseInt(year, 10);
       
@@ -49,8 +41,14 @@ function FilterSection({ onFilterChange }) {
           return false;
         }
       
+        // Ensure "From" year is not greater than "To" year
+        if (type === "from" && publishYear.to && yearInt > parseInt(publishYear.to, 10)) {
+          setError(`"From" year cannot be greater than "To" year.`);
+          return false;
+        }
+      
         // Ensure "To" year is not less than "From" year
-        if (type === "to" && yearInt < parseInt(publishYear.from || "0", 10)) {
+        if (type === "to" && publishYear.from && yearInt < parseInt(publishYear.from, 10)) {
           setError(`"To" year cannot be earlier than "From" year.`);
           return false;
         }
@@ -59,6 +57,7 @@ function FilterSection({ onFilterChange }) {
         return true;
       };
       
+      // Live Publish year change
       const handleYearChange = (type, value) => {
         // Always update the state first
         setPublishYear((prev) => ({
@@ -66,7 +65,16 @@ function FilterSection({ onFilterChange }) {
           [type]: value, // Update "from" or "to" based on type
         }));
       
-        // Perform validation only when the input is a complete year
+        // Perform validation and set default "To" year if empty
+        if (type === "to" && value.trim() === "") {
+          setPublishYear((prev) => ({
+            ...prev,
+            to: currentYear.toString(),
+          }));
+          applyFilters(selectedGenres, pages, searchQuery, { ...publishYear, to: currentYear.toString() }, selectedRatings);
+          return;
+        }
+      
         if (value.length === 4) {
           if (validateYear(value, type)) {
             const updatedPublishYear = { ...publishYear, [type]: value };
@@ -87,6 +95,15 @@ function FilterSection({ onFilterChange }) {
           applyFilters(selectedGenres, pages, searchQuery, publishYear, updatedRatings);
       };
 
+      // Update genre selection
+      const toggleGenre = (genre) => {
+        const updatedGenres = selectedGenres.includes(genre)
+        ? selectedGenres.filter((g) => g !== genre)
+        : [...selectedGenres, genre];
+        setSelectedGenres(updatedGenres);
+        applyFilters(updatedGenres, pages, searchQuery, publishYear, selectedRatings);
+      };
+
       // Apply filters: genres, pages, search query, and publish year
       const applyFilters = (genres = [], maxPages = 800, query = "", yearRange = {}, ratings = []) => {
           const filteredBooks = mockBooks.filter((book) => {
@@ -100,11 +117,13 @@ function FilterSection({ onFilterChange }) {
             const matchesYear =
               (!yearRange?.from || bookYear >= parseInt(yearRange.from || "0", 10)) &&
               (!yearRange?.to || bookYear <= parseInt(yearRange.to || currentYear, 10));
+            const integerRating = Math.floor(book.averageRating);
             const matchesRating =
-              ratings.length === 0 || ratings.includes(Math.round(book.averageRating));
+              ratings.length === 0 || ratings.includes(integerRating);
       
             return matchesGenre && matchesPages && matchesSearch && matchesYear && matchesRating;
           });
+          console.log("Genres:", genres);
       
           // Pass filtered data to the parent component
           onFilterChange(filteredBooks);
@@ -179,7 +198,7 @@ function FilterSection({ onFilterChange }) {
           <input
             type="text"
             list="years"
-            placeholder="YYYY or select"
+            placeholder="YYYY"
             value={publishYear.from || ""}
             onChange={(e) => handleYearChange("from", e.target.value)} // Allow typing
             className={`w-full px-2 py-1 text-sm border ${
@@ -208,6 +227,7 @@ function FilterSection({ onFilterChange }) {
             </option>
           ))}
         </datalist>
+        <p className="text-xs mt-1">*use YYYY format (1800-2024)</p>
         {error && <p className="text-xs text-red-500 mt-2">{error}</p>}
       </div>
 

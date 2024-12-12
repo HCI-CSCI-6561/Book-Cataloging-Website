@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { TbStar, TbStarFilled, TbStarHalfFilled } from "react-icons/tb";
-import { IoClose } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
 
 // Dynamic star rendering component
-const RatingStars = ({ rating }) => {
+export const RatingStars = ({ rating}) => {
   const getStars = () => {
     const stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -32,15 +31,12 @@ const RatingStars = ({ rating }) => {
 };
 
 // const BookCard = ({ book, onReviewClick }) => {
-const BookCard = ({ book }) => {
-
-    // TODO Navigate to book review page based on the id of the book
-    const navigate = useNavigate();
-    const onReviewClick = () => {
-      navigate(`/review/${book.id}`); //use backticks (`) instead of single quotes (') for the template literal to work properly
-    };
-
-  const [selectedBook, setSelectedBook] = useState(null);
+const BookCard = ({ book, selectedBook, setSelectedBook   }) => {
+  const navigate = useNavigate();
+  const onReviewClick = () => {
+    navigate(`/review/${book.id}`); //use backticks (`) instead of single quotes (') for the template literal to work properly
+  };
+  // const [selectedBook, setSelectedBook] = useState(null);
   const [selectedOption, setSelectedOption] = useState("Want to Read");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const options = ["Want to Read", "Reading", "Read"];
@@ -52,16 +48,11 @@ const BookCard = ({ book }) => {
     setIsDropdownOpen(false);
   };
 
-  const handleMoreClick = (book) => {
+  const handleMoreClick = () => {
     setSelectedBook(book);
   };
 
-  const handleClosePopout = () => {
-    setSelectedBook(null);
-  };
-
   if (!book) return null; 
-
 
   return (
     <>
@@ -88,6 +79,7 @@ const BookCard = ({ book }) => {
               <p>Volume: {book.volume}</p>
               <p>Total Volumes: {book.totalVolumes}</p>
               {/* Tags Section */}
+              <p>Genre: </p>
               <div className="flex flex-wrap gap-1 mt-1">
                 {Array.isArray(book.genre) ? (
                   book.genre.map((g, index) => (
@@ -156,95 +148,6 @@ const BookCard = ({ book }) => {
           </div>
         </div>
       </div>
-
-      {/* Popout for More Details */}
-      {selectedBook && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center">
-          <div className="bg-white rounded-lg p-6 w-3/4 max-w-2xl relative">
-            <button
-              onClick={handleClosePopout}
-              className="absolute top-3 right-3 text-gray-500 hover:text-gray-700"
-            >
-              <IoClose size={24} />
-            </button>
-            {/* Full Details of the book*/}
-            <div className="flex">
-            <div className="mb-1">
-              <img
-                src={selectedBook.image || "https://via.placeholder.com/150"}
-                alt={`${selectedBook.name} cover`}
-                className="w-40 h-55 object-cover rounded shadow-md mb-4"
-              />
-            </div>
-            <div className="ml-5 flex flex-col">
-              <div className="flex items-center mb-2">
-                {/* Dynamic Stars */}
-                <RatingStars rating={selectedBook.averageRating} className="size-7"/>
-                <span className="ml-2 text-gray-600 font-medium text-base">{selectedBook.averageRating}</span>
-              </div>
-              <div className="text-base text-gray-600">
-                <p>No of reviews: {selectedBook.reviews.length}</p>
-                <p>Published On: {selectedBook.publishDate}</p>
-                <p>Total Pages: {selectedBook.pages}</p>
-                <p>Volume: {selectedBook.volume}</p>
-                <p>Total Volumes: {book.totalVolumes}</p>
-                {/* Tags Section */}
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {Array.isArray(selectedBook.genre) ? (
-                    book.genre.map((g, index) => (
-                      <span key={index} className="px-2 py-1 text-xs bg-gray-200 rounded">{g}</span>
-                    ))
-                  ) : (
-                    <span className="px-2 py-1 text-xs bg-gray-200 rounded">{book.genre || "Unknown"}</span>
-                  )}
-                </div>
-              </div>
-            </div>
-            </div>
-            {/* Title and Details Section */}
-            <div className="mt-1 flex-grow"></div>
-            <h2 className="font-bold text-xl mb-1">{selectedBook.name}</h2>
-            <p className="text-gray-700 italic text-base mb-2">by {selectedBook.author}</p>
-            <p className="text-gray-800">{selectedBook.description}</p>
-          
-          {/* Buttons Section */}
-          <div className="mt-3 flex justify-between items-center relative">
-            <button
-              className="px-3 py-1 text-sm font-semibold bg-gray-300 rounded hover:bg-gray-400 flex-shrink-0"
-              onClick={() => onReviewClick(book)}
-            >
-              Let's give a Review!
-            </button>
-
-            {/* Dropdown Button */}
-            <div className="relative">
-              <button
-                onClick={toggleDropdown}
-                className="w-[150px] px-3 py-1 text-sm font-semibold bg-gray-300 rounded hover:bg-gray-400 text-left flex items-center justify-between"
-              >
-                {selectedOption}
-                <span className="ml-2">▼</span>
-              </button>
-
-              {/* Dropdown Menu */}
-              {isDropdownOpen && (
-                <ul className="absolute z-10 w-full mt-2 bg-white border rounded-lg shadow-lg">
-                  {options.map((option) => (
-                    <li
-                      key={option}
-                      onClick={() => handleOptionClick(option)}
-                      className="px-4 py-2 text-sm text-gray-700 cursor-pointer hover:bg-gray-100"
-                    >
-                      {option}
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          </div>
-          </div>
-        </div>
-        )}
     </>
   );
 };

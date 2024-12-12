@@ -6,12 +6,9 @@ import BookCard from './components/BookCard';
 import BookListing from './components/BookListing';
 import NavHeader from './components/NavHeader';
 import FilterSection from './components/FilterSection';
-
-import BookDetail from './components/BookDetail';
 import Bookshelf from './components/Bookshelf';
-import HomeBlock from './components/HomeBlock';
 import ReviewPage from './components/ReviewPage';
-import Reviews from './components/Reviews';
+import Homepage from './components/Homepage';
 
 function App() {
   return (
@@ -37,19 +34,10 @@ function App() {
           element={<FilterSection />} />
         <Route
           path="/home"
-          element={<HomeBlock />} /> 
+          element={<Homepage />} /> 
         <Route
           path="/review/:id"
           element={<ReviewPage />} /> 
-        <Route
-          path="/book"
-          element={
-            <div className="bg-[#b08c7d] min-h-screen p-6">
-              <BookDetail />
-              <Reviews />
-            </div>
-          }
-        />
         <Route
           path="/bookshelf"
           element={<Bookshelf />} />

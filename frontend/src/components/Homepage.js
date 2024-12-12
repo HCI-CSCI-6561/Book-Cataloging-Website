@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import NavBar from "./NavBar";
 import { Link } from 'react-router-dom';
 
-function HomeBlock() {
+function Homepage() {
 
   return (
     <>
@@ -17,11 +17,12 @@ function HomeBlock() {
                     BOOK NEST
                 </p>
                 <p className="text-secondary font-semibold text-xl">
-                    Step closer and allow the words to beckon you into their magical embrace.
+                    ✨ Where Stories Take Flight ✨
                 </p>
                 <div className="text-primary mt-16">
-                    <p>Come, dear reader, and lose yourself in the magic</p>
-                    <p>And wonder that awaits within the BOOK NEST</p>
+                    <p>Come, dear dreamer, let the tales carry you to places where the extraordinary awaits.</p>
+                    {/* <p>To places where the extraordinary awaits.</p> */}
+                    <p>The Book Nest: Your next adventure begins here!</p>
                 </div>
                 <div className="mt-5">
                     <Link 
@@ -44,4 +45,4 @@ function HomeBlock() {
     );
     }
 
-export default HomeBlock;
+export default Homepage;

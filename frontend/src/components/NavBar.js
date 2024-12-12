@@ -50,13 +50,13 @@ export default function NavBar({ currentPage}) {
       {currentPage === "homepage" && (
         <>
           {/* Search Bar */}
-          <div className="flex items-center bg-[#3f2929] px-4 py-2 rounded-full">
+          <div className="flex items-center bg-slate-100 px-4 py-2 rounded-full">
             <input
               type="text"
               placeholder="Search Book/Author"
-              className="bg-transparent text-white placeholder-gray-300 focus:outline-none text-sm"
+              className="bg-transparent text-black placeholder-black focus:outline-none text-sm"
             />
-            <AiOutlineSearch className="text-white ml-2" />
+            <AiOutlineSearch className="text-black ml-2" />
           </div>
         </>
       )}

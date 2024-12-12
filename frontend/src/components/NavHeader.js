@@ -1,6 +1,7 @@
-import React from "react";
+import React , { useState } from "react";
 import { MdHome } from "react-icons/md"; // Home icon
 import { Link, useLocation } from "react-router-dom";
+
 
 export default function NavHeader() {
   const location = useLocation(); // Get the current location
@@ -17,6 +18,15 @@ export default function NavHeader() {
 
   // Generate breadcrumb trail
   const breadcrumbTrail = pathname.split("/").filter(Boolean);
+
+  // // Sort options
+  // const [sortOption, setSortOption] = useState("");
+
+  // const handleSortChange = (e) => {
+  //   const selectedOption = e.target.value;
+  //   setSortOption(selectedOption);
+  //   onSortChange(selectedOption); // Pass selected sort option to parent
+  // };
 
   return (
     <div>
@@ -52,6 +62,27 @@ export default function NavHeader() {
             );
           })}
         </div>
+
+        {/* Sort Dropdown
+        <div className="flex items-center">
+          <label htmlFor="sort" className="mr-2 text-sm">
+            Sort by:
+          </label>
+          <select
+            id="sort"
+            className="border rounded px-2 py-1 text-sm"
+            value={sortOption}
+            onChange={handleSortChange}
+          >
+            <option value="" disabled>
+              Select
+            </option>
+            <option value="publish_date">Publish Date</option>
+            <option value="book_title">Book Title</option>
+            <option value="author_name">Author</option>
+          </select>
+        </div> */}
+
       </nav>
     </div>
   );
