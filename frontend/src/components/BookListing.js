@@ -15,6 +15,7 @@ const BookListing = () => {
   }; 
   const [filteredBooks, setFilteredBooks] = useState(mockBooks); // State for filtered books
   const [selectedBook, setSelectedBook] = useState(null); // Selected book for modal
+  const [sortOption, setSortOption] = useState({ option: "", direction: "asc" }); // Selected sort option
 
   // Handle filter updates from FilterSection
   const handleFilterChange = (updatedBooks) => {
@@ -43,12 +44,14 @@ const BookListing = () => {
       <NavBar />
 
       {/* Navigation Section */}
-      <NavHeader />
+      <NavHeader onSortChange={setSortOption} />
 
       {/* Main Content */}
       <div className="flex flex-1">
         {/* Sidebar */}
-        <FilterSection onFilterChange={handleFilterChange} />
+        <FilterSection books={mockBooks}
+          onFilterChange={handleFilterChange}
+          sortOption={sortOption} />
        
 
         {/* Book Listing Grid */}

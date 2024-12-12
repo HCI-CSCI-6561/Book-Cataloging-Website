@@ -1,9 +1,9 @@
-import React, { useState }  from 'react';
+import React, { useCallback, useState, useEffect }  from 'react';
 import { AiOutlineSearch } from "react-icons/ai"; 
-import { IoIosArrowDropdown } from "react-icons/io"; 
+// import { IoIosArrowDropdown } from "react-icons/io"; 
 import { genres, mockBooks } from "../mockdata";
 
-function FilterSection({ onFilterChange }) {
+function FilterSection({ books, onFilterChange, sortOption  }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [pages, setPages] = useState(800); // Default max pages
@@ -21,6 +21,37 @@ function FilterSection({ onFilterChange }) {
         setSearchQuery(query);
         applyFilters(selectedGenres, pages, query);
     };
+
+    // Handle sort 
+    const handleSort = useCallback(() => {
+      let sortedBooks = [...books];
+      if (sortOption.option === "publish_date") {
+        sortedBooks.sort((a, b) =>
+          sortOption.direction === "asc"
+            ? new Date(a.publishDate) - new Date(b.publishDate)
+            : new Date(b.publishDate) - new Date(a.publishDate)
+        );
+      } else if (sortOption.option === "book_title") {
+        sortedBooks.sort((a, b) =>
+          sortOption.direction === "asc"
+            ? a.name.localeCompare(b.name)
+            : b.name.localeCompare(a.name)
+        );
+      } else if (sortOption.option === "author_name") {
+        sortedBooks.sort((a, b) =>
+          sortOption.direction === "asc"
+            ? a.author.localeCompare(b.author)
+            : b.author.localeCompare(a.author)
+        );
+      }
+      onFilterChange(sortedBooks); // Pass sorted books to parent
+    }, [books, sortOption, onFilterChange]);
+  
+    useEffect(() => {
+      if (sortOption.option) {
+        handleSort();
+      }
+    }, [sortOption, handleSort]);
 
     // Update page range
     const handlePageChange = (e) => {
@@ -233,7 +264,7 @@ function FilterSection({ onFilterChange }) {
 
       {/* Rate Filter */}
       <div className="mb-6">
-        <h3 className="filter-section-subheading">Rate</h3>
+        <h3 className="filter-section-subheading">Rating</h3>
         <div className="flex flex-col space-y-2">
           {[5, 4, 3, 2, 1].map((star) => (
             <label key={star} className="filter-section-label">

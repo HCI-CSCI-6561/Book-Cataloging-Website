@@ -5,19 +5,19 @@
     gap: 20px;
     padding: 20px;
     font-family: Arial, sans-serif;
-    color: #333;
-    background-color: #f9f3f3;
+    color: bg-neutral-100;
+    background-color: #ffffff;
     height: 100vh;
     box-sizing: border-box;
 }
 
 .left-panel {
-    background-color: #f5d5d5;
+    background-color: #c8c2c2;
     padding: 20px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 }
 
 .book-image {
@@ -32,7 +32,7 @@
 }
 
 .right-panel {
-    background-color: #fce4e4;
+    background-color: #dcd7d7;
     padding: 20px;
     border-radius: 8px;
     display: flex;
@@ -52,10 +52,10 @@ h3 {
 }
 
 .review-card {
-    background-color: white;
+    background-color: rgb(231, 226, 226);
     border-radius: 8px;
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(175, 156, 156, 0.1);
 }
 
 .username {
@@ -88,7 +88,7 @@ h3 {
     align-items: center;
     margin-top: 20px;
     justify-content: space-between;
-    background-color: white; /* 白色背景 */
+    background-color: rgb(233, 229, 229); /* 白色背景 */
     padding: 20px;
     border-radius: 10px; /* 圆角边框 */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
@@ -104,28 +104,29 @@ h3 {
     margin-bottom: 15px;
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc; /* 边框 */
+    border: 1px solid #818181; /* 边框 */
     border-radius: 5px; /* 圆角 */
     resize: none; /* 禁止拖拽改变大小 */
 }
 
 /* 按钮样式 */
 .review-button, .discussion-button {
-    background-color: #e57373;
+    background-color: #0a0a0a;
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
+    margin: 10px auto; /* 居中对齐 */
+    display: block; /* 将按钮显示为块级元素 */
+    text-align: center;
+    /*
     cursor: pointer;
-}
-
-.discussion-button {
     align-self: flex-start;
-    margin-top: 10px;
+    margin-top: 10px;*/
 }
 
 .submit-button, .cancel-button {
-    background-color: #e57373;
+    background-color: #000000;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -136,8 +137,8 @@ h3 {
 }
 
 .cancel-button {
-    background-color: #ccc; /* 取消按钮的灰色背景 */
-    color: #333; /* 字体颜色 */
+    background-color: #de1e1e; /* 取消按钮的灰色背景 */
+    color: #f4efef; /* 字体颜色 */
 }
 
 .submit-button:hover, .cancel-button:hover {
@@ -146,7 +147,7 @@ h3 {
 
 /* 删除按钮样式 */
 .delete-button {
-    background-color: #ff6b6b;
+    background-color: #222222;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -156,7 +157,7 @@ h3 {
 }
 
 .delete-button:hover {
-    background-color: #ff4c4c;
+    background-color: #fa0202;
     opacity: 0.9;
 }
 
@@ -173,3 +174,42 @@ h3 {
     align-items: center;
     margin-top: 20px;
 }
+
+/*滑动条样式*/
+    .rating-slider {
+    margin-bottom: 15px;
+    text-align: center;
+    }
+    
+    .slider-label {
+        font-size: 16px;
+        margin-bottom: 8px;
+        display: block;
+    }
+    
+    .slider {
+        width: 100%;
+        appearance: none;
+        height: 5px;
+        background: #ddd;
+        border-radius: 5px;
+        outline: none;
+    }
+    
+    .slider::-webkit-slider-thumb {
+        appearance: none;
+        width: 15px;
+        height: 15px;
+        background: #0a0a0a;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    
+    .slider::-moz-range-thumb {
+        width: 15px;
+        height: 15px;
+        background: #0a0a0a;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+    

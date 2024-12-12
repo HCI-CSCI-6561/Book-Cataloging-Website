@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import './App.css';
 import NavBar from './components/NavBar';
 import LoginPage from './components/LoginPage';
@@ -9,8 +10,11 @@ import FilterSection from './components/FilterSection';
 import Bookshelf from './components/Bookshelf';
 import ReviewPage from './components/ReviewPage';
 import Homepage from './components/Homepage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <Router>
       <Routes>
@@ -40,7 +44,12 @@ function App() {
           element={<ReviewPage />} /> 
         <Route
           path="/bookshelf"
-          element={<Bookshelf />} />
+          element={
+            <ProtectedRoute isAuthenticated={isAuthenticated}>
+              <Bookshelf />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );
